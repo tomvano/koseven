@@ -48,7 +48,7 @@ class Kohana_CookieTest extends Unittest_TestCase
 			'Cookie::$domain'   => 'my.domain',
 			'Cookie::$secure'   => TRUE,
 			'Cookie::$httponly' => FALSE,
-            'Cookie::$samesite' => Kohana_Cookie_Samesite::LAX
+			'Cookie::$samesite' => Kohana_Cookie_Samesite::LAX
 		]);
 
 		Kohana_CookieTest_TestableCookie::set('cookie', 'value');
@@ -58,7 +58,7 @@ class Kohana_CookieTest extends Unittest_TestCase
 			Kohana_Cookie_Properties::DOMAIN     => 'my.domain',
 			Kohana_Cookie_Properties::SECURE     => TRUE,
 			Kohana_Cookie_Properties::HTTP_ONLY  => FALSE,
-            Kohana_Cookie_Properties::SAME_SITE  => Kohana_Cookie_Samesite::LAX
+			Kohana_Cookie_Properties::SAME_SITE  => Kohana_Cookie_Samesite::LAX
 		]);
 	}
 
@@ -255,7 +255,7 @@ class Kohana_CookieTest extends Unittest_TestCase
 			Kohana_Cookie_Properties::DOMAIN    => Cookie::$domain,
 			Kohana_Cookie_Properties::SECURE    => Cookie::$secure,
 			Kohana_Cookie_Properties::HTTP_ONLY => Cookie::$httponly,
-            Kohana_Cookie_Properties::SAME_SITE => Cookie::$samesite,
+			Kohana_Cookie_Properties::SAME_SITE => Cookie::$samesite,
 		]);
 	}
 
@@ -315,7 +315,7 @@ class Kohana_CookieTest_TestableCookie extends Cookie {
 			Kohana_Cookie_Properties::DOMAIN    => $domain,
 			Kohana_Cookie_Properties::SECURE    => $secure,
 			Kohana_Cookie_Properties::HTTP_ONLY => $httponly,
-            Kohana_Cookie_Properties::SAME_SITE => $samesite
+			Kohana_Cookie_Properties::SAME_SITE => $samesite
 		];
 
 		return TRUE;
