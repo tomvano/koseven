@@ -189,17 +189,17 @@ class Kohana_Cookie {
 	protected static function _setcookie($name, $value, $expires, $path, $domain, $secure, $httponly, $samesite)
 	{
 		return setcookie(
-		    $name,
-            $value,
-            [
-                Kohana_Cookie_Properties::EXPIRES => $expires,
-                Kohana_Cookie_Properties::PATH => $path,
-                Kohana_Cookie_Properties::DOMAIN => $domain,
-                Kohana_Cookie_Properties::SECURE => $secure,
-                Kohana_Cookie_Properties::HTTP_ONLY => $httponly,
-                Kohana_Cookie_Properties::SAME_SITE => $samesite,
-            ]
-        );
+			$name,
+			$value,
+			[
+				Kohana_Cookie_Properties::EXPIRES => $expires,
+				Kohana_Cookie_Properties::PATH => $path,
+				Kohana_Cookie_Properties::DOMAIN => $domain,
+				Kohana_Cookie_Properties::SECURE => $secure,
+				Kohana_Cookie_Properties::HTTP_ONLY => $httponly,
+				Kohana_Cookie_Properties::SAME_SITE => $samesite,
+			]
+		);
 	}
 
 	/**
