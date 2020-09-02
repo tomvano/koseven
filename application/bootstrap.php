@@ -168,7 +168,7 @@ Kohana::modules([
  * cookie should be restricted to first-party or same-site context
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
  */
-// Cookie::$samesite = Samesite::STRICT;
+// Cookie::$samesite = Kohana_Cookie_Samesite::STRICT;
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of

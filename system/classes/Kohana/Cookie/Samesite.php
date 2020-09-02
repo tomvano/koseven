@@ -9,7 +9,7 @@
  * @copyright  (c) Kohana Team
  * @license    https://koseven.ga/LICENSE.md
  */
-final class Samesite
+final class Kohana_Cookie_Samesite
 {
     /**
      * Cookies are allowed to be sent with top-level navigations and will be sent along with GET request

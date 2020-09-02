@@ -9,7 +9,7 @@
  * @copyright  (c) Kohana Team
  * @license    https://koseven.ga/LICENSE.md
  */
-final class Properties
+final class Kohana_Cookie_Properties
 {
     /**
      * Name of the cookie

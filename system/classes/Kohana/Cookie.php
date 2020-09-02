@@ -43,7 +43,7 @@ class Kohana_Cookie {
     /**
      * @var string Transmit cookies with third party requests
      */
-	public static $samesite = Samesite::LAX;
+	public static $samesite = Kohana_Cookie_Samesite::LAX;
 
     /**
      * Gets the value of a signed cookie. Cookies without signatures will not
@@ -192,12 +192,12 @@ class Kohana_Cookie {
 		    $name,
             $value,
             [
-                Properties::EXPIRES => $expires,
-                Properties::PATH => $path,
-                Properties::DOMAIN => $domain,
-                Properties::SECURE => $secure,
-                Properties::HTTP_ONLY => $httponly,
-                Properties::SAME_SITE => $samesite,
+                Kohana_Cookie_Properties::EXPIRES => $expires,
+                Kohana_Cookie_Properties::PATH => $path,
+                Kohana_Cookie_Properties::DOMAIN => $domain,
+                Kohana_Cookie_Properties::SECURE => $secure,
+                Kohana_Cookie_Properties::HTTP_ONLY => $httponly,
+                Kohana_Cookie_Properties::SAME_SITE => $samesite,
             ]
         );
 	}

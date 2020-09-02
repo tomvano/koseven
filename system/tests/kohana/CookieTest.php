@@ -48,17 +48,17 @@ class Kohana_CookieTest extends Unittest_TestCase
 			'Cookie::$domain'   => 'my.domain',
 			'Cookie::$secure'   => TRUE,
 			'Cookie::$httponly' => FALSE,
-            'Cookie::$samesite' => Samesite::LAX
+            'Cookie::$samesite' => Kohana_Cookie_Samesite::LAX
 		]);
 
 		Kohana_CookieTest_TestableCookie::set('cookie', 'value');
 
 		$this->assertSetCookieWith([
-			Properties::PATH       => '/path',
-			Properties::DOMAIN     => 'my.domain',
-			Properties::SECURE     => TRUE,
-			Properties::HTTP_ONLY  => FALSE,
-            Properties::SAME_SITE  => Samesite::LAX
+			Kohana_Cookie_Properties::PATH       => '/path',
+			Kohana_Cookie_Properties::DOMAIN     => 'my.domain',
+			Kohana_Cookie_Properties::SECURE     => TRUE,
+			Kohana_Cookie_Properties::HTTP_ONLY  => FALSE,
+            Kohana_Cookie_Properties::SAME_SITE  => Kohana_Cookie_Samesite::LAX
 		]);
 	}
 
@@ -88,7 +88,7 @@ class Kohana_CookieTest extends Unittest_TestCase
 	{
 		$this->setEnvironment(['Cookie::$expiration' => self::COOKIE_EXPIRATION]);
 		Kohana_CookieTest_TestableCookie::set('foo', 'bar', $expiration);
-		$this->assertSetCookieWith([Properties::EXPIRES => $expect_expiry]);
+		$this->assertSetCookieWith([Kohana_Cookie_Properties::EXPIRES => $expect_expiry]);
 	}
 
 	/**
@@ -248,14 +248,14 @@ class Kohana_CookieTest extends Unittest_TestCase
 		$this->assertArrayNotHasKey($name, $_COOKIE);
 		// To delete the client-side cookie, Cookie::delete should send a new cookie with value NULL and expiry in the past
 		$this->assertSetCookieWith([
-			Properties::NAME      => $name,
-			Properties::VALUE     => NULL,
-			Properties::EXPIRES   => -86400,
-			Properties::PATH      => Cookie::$path,
-			Properties::DOMAIN    => Cookie::$domain,
-			Properties::SECURE    => Cookie::$secure,
-			Properties::HTTP_ONLY => Cookie::$httponly,
-            Properties::SAME_SITE => Cookie::$samesite,
+			Kohana_Cookie_Properties::NAME      => $name,
+			Kohana_Cookie_Properties::VALUE     => NULL,
+			Kohana_Cookie_Properties::EXPIRES   => -86400,
+			Kohana_Cookie_Properties::PATH      => Cookie::$path,
+			Kohana_Cookie_Properties::DOMAIN    => Cookie::$domain,
+			Kohana_Cookie_Properties::SECURE    => Cookie::$secure,
+			Kohana_Cookie_Properties::HTTP_ONLY => Cookie::$httponly,
+            Kohana_Cookie_Properties::SAME_SITE => Cookie::$samesite,
 		]);
 	}
 
@@ -308,14 +308,14 @@ class Kohana_CookieTest_TestableCookie extends Cookie {
 	protected static function _setcookie($name, $value, $expires, $path, $domain, $secure, $httponly, $samesite)
 	{
 		self::$_mock_cookies_set[] = [
-			Properties::NAME      => $name,
-			Properties::VALUE     => $value,
-			Properties::EXPIRES   => $expires,
-			Properties::PATH      => $path,
-			Properties::DOMAIN    => $domain,
-			Properties::SECURE    => $secure,
-			Properties::HTTP_ONLY => $httponly,
-            Properties::SAME_SITE => $samesite
+			Kohana_Cookie_Properties::NAME      => $name,
+			Kohana_Cookie_Properties::VALUE     => $value,
+			Kohana_Cookie_Properties::EXPIRES   => $expires,
+			Kohana_Cookie_Properties::PATH      => $path,
+			Kohana_Cookie_Properties::DOMAIN    => $domain,
+			Kohana_Cookie_Properties::SECURE    => $secure,
+			Kohana_Cookie_Properties::HTTP_ONLY => $httponly,
+            Kohana_Cookie_Properties::SAME_SITE => $samesite
 		];
 
 		return TRUE;
