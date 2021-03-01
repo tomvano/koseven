@@ -6,7 +6,7 @@
 [![Github Issues](https://img.shields.io/github/issues/koseven/koseven.svg)](https://github.com/koseven/koseven/issues)
 [![Forum](https://img.shields.io/badge/Discourse-Join%20Forum-ff9c08.svg?logo=discourse)](https://koseven.discourse.group)
 
-## [Download 3.3.9](https://github.com/koseven/koseven/releases/tag/3.3.9)
+## [Download 3.3.10](https://github.com/koseven/koseven/releases/tag/3.3.10)
 
 ## [Join our Forum](https://koseven.discourse.group/)
 
