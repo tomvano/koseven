@@ -2588,15 +2588,21 @@ class KO7_ORM extends Model implements Serializable {
 	 * Checks whether a column value is unique.
 	 * Excludes itself if loaded.
 	 *
-	 * @param   string   $field  the field to check for uniqueness
-	 * @param   mixed    $value  the value to check for uniqueness
-	 * @return  bool     whteher the value is unique
+	 * @param   string   $field  	  the field to check for uniqueness
+	 * @param   mixed    $value  	  the value to check for uniqueness
+	 * @param   bool     $match_case  match case for uniqueness
+	 * @return  bool     whteher the  value is unique
 	 */
-	public function unique($field, $value)
+	public function unique($field, $value, $match_case = FALSE)
 	{
-		$model = ORM::factory($this->object_name())
-			->where($field, '=', $value)
-			->find();
+		$model = ORM::factory($this->object_name());
+		
+		if ($match_case)
+			$model->where(DB::expr('binary '.$field), '=', DB::expr('binary \''.$value.'\''));
+		else
+			$model->where($field, '=', $value);
+		
+		$model = $model->find();
 
 		if ($this->loaded())
 		{
