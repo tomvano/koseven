@@ -36,9 +36,6 @@
     "phpunit/phpunit": "^8",
     "internations/http-mock": "^0.12"
   },
-  "conflict": {
-    "kohana/core": "3.3.*"
-  },
   "replace": {
     "kohana/core": "3.3.*"
   }
