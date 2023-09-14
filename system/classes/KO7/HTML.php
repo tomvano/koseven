@@ -341,5 +341,23 @@ class KO7_HTML {
 
 		return $compiled;
 	}
-
+	
+	/**
+	 * Creates an HTML tag element.
+	 *
+	 *     echo HTML::tag('div', 'Hello world');
+	 *
+	 * @param   string  $type       HTML element
+	 * @param   string  $content    content of the HTML element
+	 * @param   array   $attributes default attributes
+	 * @return  string
+	 * @uses    HTML::attributes
+	 */
+	public static function tag($type, $content = NULL, array $attributes = NULL): string
+	{
+		if ( ! is_array($attributes))
+			$attributes = [];
+		
+		return '<'.$type.' '.self::attributes($attributes).'>'.$content.'</'.$type.'>';
+	}
 }
