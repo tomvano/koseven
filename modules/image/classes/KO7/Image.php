@@ -86,7 +86,7 @@ abstract class KO7_Image {
 	 *
 	 * @return mixed
 	 */
-	public static function factory($file, $driver = NULL)
+	public static function factory(string $file, $driver = NULL)
 	{
 		if ($driver === NULL)
 		{
@@ -101,7 +101,7 @@ abstract class KO7_Image {
 		}
 
 		// Set the class name
-		$class = 'Image_' . $driver;;
+		$class = 'Image_' . $driver;
 
 		// Check if class exists and extends this one
 		if ( is_string($class) && (! class_exists($class) || ! ($class = new $class($file)) instanceof Image))
@@ -130,40 +130,53 @@ abstract class KO7_Image {
 	 *
 	 * @param string $file Image file path
 	 *
-	 * @throws  Image_Exception
-	 *
 	 * @return  void
+	 *@throws  Image_Exception
+	 *
 	 */
-	public function __construct($file)
+	public function __construct(string $file)
 	{
+        $info = false;
+        if (empty($file)) {
+			throw new Image_Exception('Not an image: :file', [
+				':file' => Debug::path($file)
+			]);
+        }
 		try
 		{
 			// Get the real path to the file
 			$file = realpath($file);
-
-			// Get the image information
-			$info = getimagesize($file);
+            // Check if valid image file
+            //Suppress warning:  getimagesize(): Filename cannot be empty
+            if (is_file($file) && is_readable($file)) {
+                // Get the image information
+                $info = getimagesize($file);
+            } else {
+                throw new Image_Exception('Not an image or invalid image: :file', [
+                    ':file' => Debug::path($file)
+                ]);
+            }
 		}
 		catch (Exception $e)
 		{
-			// Catch exceptions, we don't need to thow them as we check them below
-		}
-
-		// Check if valid image file
-		if (empty($file) || empty($info))
-		{
-			throw new Image_Exception('Not an image or invalid image: :file', [
-				':file' => Debug::path($file)
-			]);
-		}
-
+			// Catch exceptions
+            throw new Image_Exception('Unknow error: :error  an image :file', [
+                ':file' => Debug::path($file),
+                ':error' => $e->getMessage()
+            ]);
+        }
+        if ($info === FALSE) {
+            throw new Image_Exception('The file is not an image :file', [
+                ':file' => Debug::path($file)
+            ]);
+        }
 		// Store the image information
-		$this->file = $file;
+        $this->file = $file;
 		$this->width = $info[0];
 		$this->height = $info[1];
+        // Type https://www.php.net/manual/en/function.image-type-to-mime-type.php
 		$this->type = $info[2];
 		$this->mime = image_type_to_mime_type($this->type);
-
 		// Check if image type is supported by our driver
 		// @codeCoverageIgnoreStart
 		if ( ! $this->_is_supported_type($this->type)) {
@@ -179,15 +192,15 @@ abstract class KO7_Image {
 	 * Resize the image to the given size. Either the width or the height can
 	 * be omitted and the image will be resized proportionally.
 	 *
-	 * @param integer $width  New width
-	 * @param integer $height New height
-	 * @param integer $master Master dimension
+	 * @param integer|null $width  New width
+	 * @param integer|null $height New height
+	 * @param integer|null $master Master dimension
 	 *
 	 * @throws Image_Exception
 	 *
 	 * @return  self
 	 */
-	public function resize($width = NULL, $height = NULL, $master = NULL)
+	public function resize(int $width = NULL, int $height = NULL, int $master = NULL)
 	{
 		// Check if at least width or height was set
 		if ($width === NULL && $height === NULL)

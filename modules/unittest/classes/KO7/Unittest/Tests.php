@@ -105,7 +105,7 @@ class KO7_Unittest_Tests {
 	 * If no directories are provided then the function'll load the whitelist
 	 * set in the config file
 	 *
-	 * @param Unittest_Testsuite   $suite 		  Suite to load the whitelist into
+	 * @param Unittest_TestSuite|null $suite Suite to load the whitelist into
 	 *
 	 * @throws KO7_Exception
 	 */

@@ -24,7 +24,7 @@ class KO7_HTMLTest extends Unittest_TestCase {
 	// @codingStandardsIgnoreEnd
 	{
 		parent::setUp();
-		KO7::$config->load('url')->set('trusted_hosts', ['www\.koseven\.ga']);
+		KO7::$config->load('url')->set('trusted_hosts', ['www\.koseven\.dev']);
 	}
 
 	/**

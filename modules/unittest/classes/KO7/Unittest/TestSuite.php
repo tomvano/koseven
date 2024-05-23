@@ -33,7 +33,7 @@ abstract class KO7_Unittest_TestSuite extends TestSuite
 	 *
 	 * @param  TestResult|NULL $result
 	 *
-	 * @return TestResult
+	 * @return ?TestResult
 	 * @throws ReflectionException
 	 */
 	public function run(TestResult $result = NULL): TestResult

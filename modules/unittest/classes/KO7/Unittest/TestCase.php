@@ -21,6 +21,9 @@ abstract class KO7_Unittest_TestCase extends TestCase {
 	 */
 	protected $_helpers;
 
+	//Workaround for test
+    private $requestTimeFloat;
+    private $requestTime;
 	/**
 	 * A default set of environment to be applied before each test
 	 * @var array
@@ -38,6 +41,9 @@ abstract class KO7_Unittest_TestCase extends TestCase {
 	 */
 	public function setUp() : void
 	{
+        $this->requestTimeFloat = $_SERVER['REQUEST_TIME_FLOAT'];
+        $this->requestTime = $_SERVER['REQUEST_TIME'];
+
 		$this->_helpers = new Unittest_Helpers;
 
 		// Make sure PHPUnit does not backup globals
@@ -60,7 +66,8 @@ abstract class KO7_Unittest_TestCase extends TestCase {
 	public function tearDown() : void
 	{
 		$this->_helpers->restore_environment();
-
+        $_SERVER['REQUEST_TIME_FLOAT'] = $this->requestTimeFloat;
+        $_SERVER['REQUEST_TIME'] = $this->requestTime;
 		parent::tearDown();
 	}
 

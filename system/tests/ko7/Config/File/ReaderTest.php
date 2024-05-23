@@ -23,7 +23,7 @@ class KO7_Config_File_ReaderTest extends KO7_Unittest_TestCase {
 	 */
 	public function test_load_returns_empty_array_if_conf_dir_dnx()
 	{
-		$config = new KO7_Config_File_Reader('gafloogle');
+		$config = new KO7_Config_File('gafloogle');
 
 		self::assertSame([], $config->load('values'));
 	}
@@ -36,7 +36,7 @@ class KO7_Config_File_ReaderTest extends KO7_Unittest_TestCase {
 	 */
 	public function test_load_returns_empty_array_if_conf_dnx()
 	{
-		$config = new KO7_Config_File_Reader;
+		$config = new KO7_Config_File;
 
 		self::assertSame([], $config->load('gafloogle'));
 	}
@@ -60,7 +60,7 @@ class KO7_Config_File_ReaderTest extends KO7_Unittest_TestCase {
 			self::markTestSkipped('PHP YAML required to execute this test.');
 		}
 
-		$config = new KO7_Config_File_Reader;
+		$config = new KO7_Config_File;
 
 		// Generate Paths for Configuration Storage
 		$path = APPPATH . 'config' . DIRECTORY_SEPARATOR;
