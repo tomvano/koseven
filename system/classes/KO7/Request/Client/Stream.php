@@ -76,37 +76,44 @@ class KO7_Request_Client_Stream extends Request_Client_External {
 		// Throws an Exception if you try to write smth. but requested stream is not write-able or unavailable
 		try
 		{
+			//Suppress warning: failed to open stream: HTTP wrapper does not support writeable connections
+			if (is_resource($context) && get_resource_type($context) === 'stream-context' && $mode === 'r+') {
+				throw new Request_Exception('Failed to open stream: HTTP wrapper does not support writeable connections: '.$uri);
+			}
 			$stream = fopen($uri, $mode, FALSE, $context);
 		}
 		catch(Exception $e)
 		{
 			throw new Request_Exception($e->getMessage());
 		}
+		if (is_resource($stream)) {
+			$meta_data = stream_get_meta_data($stream);
 
-		$meta_data = stream_get_meta_data($stream);
+			// Get the HTTP response code
+			$http_response = array_shift($meta_data['wrapper_data']);
 
-		// Get the HTTP response code
-		$http_response = array_shift($meta_data['wrapper_data']);
+			// Fetch respone protocol and status
+			preg_match_all('/(\w+\/\d\.\d) (\d{3})/', $http_response, $matches);
 
-		// Fetch respone protocol and status
-		preg_match_all('/(\w+\/\d\.\d) (\d{3})/', $http_response, $matches);
+			$protocol = $matches[1][0];
+			$status = (int)$matches[2][0];
 
-		$protocol = $matches[1][0];
-		$status = (int)$matches[2][0];
+			// Get any existing response headers
+			$response_header = $response->headers();
 
-		// Get any existing response headers
-		$response_header = $response->headers();
+			// Process headers
+			array_map([$response_header, 'parse_header_string'], [], $meta_data['wrapper_data']);
 
-		// Process headers
-		array_map([$response_header, 'parse_header_string'], [], $meta_data['wrapper_data']);
+			// Build the response
+			$response->status($status)->protocol($protocol)->body(stream_get_contents($stream));
 
-		// Build the response
-		$response->status($status)->protocol($protocol)->body(stream_get_contents($stream));
+			// Close the stream after use
+			fclose($stream);
 
-		// Close the stream after use
-		fclose($stream);
-
-		return $response;
+			return $response;
+		} else {
+			throw new Request_Exception('Request stream could not be opened: '.$request->method() .' '.$request->uri());
+		}
 	}
 
 }

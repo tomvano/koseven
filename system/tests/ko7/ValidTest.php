@@ -1013,7 +1013,7 @@ class KO7_ValidTest extends Unittest_TestCase
 	{
 		$this->assertSame(
 			$correct,
-			Valid::type($string, ...$types)
+			Valid::type($value, ...$types)
 		);
 	}
 

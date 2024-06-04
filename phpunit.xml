@@ -5,7 +5,15 @@
 		bootstrap="modules/unittest/bootstrap.php"
 		cacheTokens="true"
 		beStrictAboutOutputDuringTests="true"
-		beStrictAboutTodoAnnotatedTests="true">
+		beStrictAboutTodoAnnotatedTests="true"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		stopOnFailure="false"
+	>
+	<php>
+		<ini name="memory_limit" value="512M" />
+	</php>
 
 	<!-- Koseven Test Suite -->
 	<testsuite name="default">

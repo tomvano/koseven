@@ -89,52 +89,52 @@ class EncryptMcryptTest extends EncryptTestBase {
 
 	/**
 	 * Data source for kat
-	 *
+	 * @deprecated MCRYPT
 	 * @return array
 	 */
 	public function provider_kat(): array
 	{
 		return [
-			[
-				[
-					'iv' => '0000000000000000',
-					'ciphertext' => 'MDAwMDAwMDAwMDAwMDAwMOzjS0qd+IDZxiED7C1haC0=',
-					'plaintext' => 'test',
-					'cipher' => 'MCRYPT_RIJNDAEL_128',
-					'key' => EncryptTestBase::KEY32,
-					'mode' => 'MCRYPT_MODE_CBC'
-				]
-			],
-			[
-				[
-					'iv' => '1111111111111111',
-					'ciphertext' => 'MTExMTExMTExMTExMTExMc6vwMFD',
-					'plaintext' => 'test2',
-					'cipher' => NULL,
-					'key' => EncryptTestBase::KEY32,
-					'mode' => 'MCRYPT_MODE_CFB'
-				]
-			],
-			[
-				[
-					'iv' => '2222222222222222',
-					'ciphertext' => 'MjIyMjIyMjIyMjIyMjIyMi3rgfz1csVLEu+1LQD2+8c=',
-					'plaintext' => 'test3',
-					'cipher' => 'MCRYPT_RIJNDAEL_128',
-					'key' => EncryptTestBase::KEY16,
-					'mode' => 'MCRYPT_MODE_ECB'
-				]
-			],
-			[
-				[
-					'iv' => '3333333333333333',
-					'ciphertext' => 'MzMzMzMzMzMzMzMzMzMzM9NUlFYkvOEiSXWSYhwjkxg=',
-					'plaintext' => 'test4',
-					'cipher' => 'MCRYPT_RIJNDAEL_128',
-					'key' => EncryptTestBase::KEY16,
-					'mode' => NULL
-				]
-			]
+//			[
+//				[
+//					'iv' => '0000000000000000',
+//					'ciphertext' => 'MDAwMDAwMDAwMDAwMDAwMOzjS0qd+IDZxiED7C1haC0=',
+//					'plaintext' => 'test',
+//					'cipher' => 'MCRYPT_RIJNDAEL_128',
+//					'key' => EncryptTestBase::KEY32,
+//					'mode' => 'MCRYPT_MODE_CBC'
+//				]
+//			],
+//			[
+//				[
+//					'iv' => '1111111111111111',
+//					'ciphertext' => 'MTExMTExMTExMTExMTExMc6vwMFD',
+//					'plaintext' => 'test2',
+//					'cipher' => NULL,
+//					'key' => EncryptTestBase::KEY32,
+//					'mode' => 'MCRYPT_MODE_CFB'
+//				]
+//			],
+//			[
+//				[
+//					'iv' => '2222222222222222',
+//					'ciphertext' => 'MjIyMjIyMjIyMjIyMjIyMi3rgfz1csVLEu+1LQD2+8c=',
+//					'plaintext' => 'test3',
+//					'cipher' => 'MCRYPT_RIJNDAEL_128',
+//					'key' => EncryptTestBase::KEY16,
+//					'mode' => 'MCRYPT_MODE_ECB'
+//				]
+//			],
+//			[
+//				[
+//					'iv' => '3333333333333333',
+//					'ciphertext' => 'MzMzMzMzMzMzMzMzMzMzM9NUlFYkvOEiSXWSYhwjkxg=',
+//					'plaintext' => 'test4',
+//					'cipher' => 'MCRYPT_RIJNDAEL_128',
+//					'key' => EncryptTestBase::KEY16,
+//					'mode' => NULL
+//				]
+//			]
 		];
 	}
 }

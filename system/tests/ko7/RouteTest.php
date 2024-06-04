@@ -30,7 +30,7 @@ class KO7_RouteTest extends Unittest_TestCase
 	{
 		parent::setUp();
 
-		KO7::$config->load('url')->set('trusted_hosts', ['koseven\.ga']);
+		KO7::$config->load('url')->set('trusted_hosts', ['koseven\.dev']);
 
         /**
          * If Unit-Testing a cache driver "KO7_Cache" is indeed available
@@ -167,12 +167,13 @@ class KO7_RouteTest extends Unittest_TestCase
 	 * being loaded from the cache & therefore shouldn't override the cached attributes
 	 *
 	 * @covers Route::__construct
+	 * @noinspection PhpUnitInvalidMockingEntityInspection
 	 */
 	public function test_constructor_returns_if_uri_is_null()
 	{
 		// We use a mock object to make sure that the route wasn't recompiled
 		$route = $this->createMock('Route', ['_compile'], [], '', FALSE);
-
+		//TODO Error:(179, 13) 'static' methods cannot be mocked
 		$route
 			->expects($this->never())
 			->method('compile');

@@ -79,6 +79,15 @@ class KO7_Request_Client_Curl extends Request_Client_External {
 			$uri .= '?' . http_build_query($query, NULL, '&');
 		}
 
+		//Suppress warning:  Array keys must be CURLOPT constants or equivalent integer values
+		$curlopt_constants_hash = array_flip(get_defined_constants(true)['curl']);
+		foreach ($options as $option_key => $option_value) {
+			if ( !isset($curlopt_constants_hash[$option_key]) ) {
+				throw new Request_Exception(
+					'CURL options are invalid :$option_key in :options', [':$option_key' => $option_key]
+				);
+			}
+		}
 		// Open a new remote connection
 		$curl = curl_init($uri);
 
