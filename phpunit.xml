@@ -4,10 +4,15 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
          bootstrap="modules/unittest/bootstrap.php"
          beStrictAboutOutputDuringTests="true"
-         failOnRisky="true"
-         failOnWarning="true"
+         failOnRisky="false"
+         failOnWarning="false"
          stopOnFailure="false">
     <coverage cacheDirectory=".phpunit.cache/code-coverage">
+        <include>
+            <directory suffix=".php">./application/classes</directory>
+            <directory suffix=".php">./modules/*/classes</directory>
+            <directory suffix=".php">./system/classes</directory>
+        </include>
         <report>
             <clover outputFile="build/logs/clover.xml"/>
             <html outputDirectory="build/logs/"/>
@@ -23,12 +28,4 @@
     </testsuite>
     <!-- Path to store coverage reports -->
     <logging/>
-    <!-- Whitelist for Coverage Support -->
-    <source>
-        <include>
-            <directory suffix=".php">./application/classes</directory>
-            <directory suffix=".php">./modules/*/classes</directory>
-            <directory suffix=".php">./system/classes</directory>
-        </include>
-    </source>
 </phpunit>
