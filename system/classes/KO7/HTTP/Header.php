@@ -348,14 +348,15 @@ class KO7_HTTP_Header extends ArrayObject {
 	 * @return  void
 	 * @since   3.2.0
 	 */
-	public function offsetSet($index, $newval, $replace = TRUE)
+	public function offsetSet($index, $newval, $replace = TRUE): void
 	{
 		// Ensure the index is lowercase
 		$index = strtolower($index);
 
 		if ($replace OR ! $this->offsetExists($index))
 		{
-			return parent::offsetSet($index, $newval);
+			parent::offsetSet($index, $newval);
+			return;
 		}
 
 		$current_value = $this->offsetGet($index);
@@ -369,7 +370,7 @@ class KO7_HTTP_Header extends ArrayObject {
 			$current_value = [$current_value, $newval];
 		}
 
-		return parent::offsetSet($index, $current_value);
+		parent::offsetSet($index, $current_value);
 	}
 
 	/**
