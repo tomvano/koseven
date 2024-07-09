@@ -254,7 +254,7 @@ abstract class KO7_Database_Result implements Countable, Iterator, SeekableItera
 	 * @return  void
 	 * @throws  KO7_Exception
 	 */
-	final public function offsetSet($offset, $value)
+	final public function offsetSet($offset, $value): void
 	{
 		throw new KO7_Exception('Database results are read-only');
 	}

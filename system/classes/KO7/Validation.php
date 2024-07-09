@@ -61,7 +61,7 @@ class KO7_Validation implements ArrayAccess {
 	 * @param   mixed    $value     value to set
 	 * @return  void
 	 */
-	public function offsetSet($offset, $value)
+	public function offsetSet($offset, $value): void
 	{
 		throw new KO7_Exception('Validation objects are read-only.');
 	}
