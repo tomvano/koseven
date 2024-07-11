@@ -426,7 +426,8 @@ class KO7_ORM extends Model implements Serializable {
 		// Create the behaviors classes
 		foreach ($this->behaviors() as $behavior => $behavior_config)
 		{
-			$this->_behaviors[] = ORM_Behavior::factory($behavior, $behavior_config);
+			if ( ! is_object($behavior_config) )
+				$this->_behaviors[$behavior] = ORM_Behavior::factory($behavior, $behavior_config);
 		}
 	}
 
@@ -1335,7 +1336,7 @@ class KO7_ORM extends Model implements Serializable {
 	 */
 	public function behaviors()
 	{
-		return [];
+		return $this->_behaviors;
 	}
 
 	/**
