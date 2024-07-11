@@ -29,6 +29,18 @@ class KO7_ORM extends Model implements Serializable {
 	protected static $_init_cache = [];
 
 	/**
+	 * Implement __serialize() for PHP 8.1 deprecation warning
+	 * @return array
+	 */
+	public function __serialize(): array {}
+
+	/**
+	 * Implement __unserialize() for PHP 8.1 deprecation warning
+	 * @return array
+	 */
+	public function __unserialize(array $data): void {}
+
+	/**
 	 * Creates and returns a new model.
 	 * Model name must be passed with its' original casing, e.g.
 	 *
