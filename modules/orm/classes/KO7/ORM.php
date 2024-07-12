@@ -29,6 +29,18 @@ class KO7_ORM extends Model implements Serializable {
 	protected static $_init_cache = [];
 
 	/**
+	 * Implement __serialize() for PHP 8.1 deprecation warning
+	 * @return array
+	 */
+	public function __serialize(): array {}
+
+	/**
+	 * Implement __unserialize() for PHP 8.1 deprecation warning
+	 * @return array
+	 */
+	public function __unserialize(array $data): void {}
+
+	/**
 	 * Creates and returns a new model.
 	 * Model name must be passed with its' original casing, e.g.
 	 *
@@ -414,7 +426,8 @@ class KO7_ORM extends Model implements Serializable {
 		// Create the behaviors classes
 		foreach ($this->behaviors() as $behavior => $behavior_config)
 		{
-			$this->_behaviors[] = ORM_Behavior::factory($behavior, $behavior_config);
+			if ( ! is_object($behavior_config) )
+				$this->_behaviors[$behavior] = ORM_Behavior::factory($behavior, $behavior_config);
 		}
 	}
 
@@ -1323,7 +1336,7 @@ class KO7_ORM extends Model implements Serializable {
 	 */
 	public function behaviors()
 	{
-		return [];
+		return $this->_behaviors;
 	}
 
 	/**
