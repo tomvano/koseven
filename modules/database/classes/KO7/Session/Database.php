@@ -126,7 +126,7 @@ class KO7_Session_Database extends Session {
 		do
 		{
 			// Create a new session id
-			$id = str_replace('.', '-', uniqid(NULL, TRUE));
+			$id = str_replace('.', '-', uniqid('', TRUE));
 
 			// Get the the id from the database
 			$result = $query->execute($this->_db);
