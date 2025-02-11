@@ -29,18 +29,6 @@ class KO7_ORM extends Model implements Serializable {
 	protected static $_init_cache = [];
 
 	/**
-	 * Implement __serialize() for PHP 8.1 deprecation warning
-	 * @return array
-	 */
-	public function __serialize(): array {}
-
-	/**
-	 * Implement __unserialize() for PHP 8.1 deprecation warning
-	 * @return array
-	 */
-	public function __unserialize(array $data): void {}
-
-	/**
 	 * Creates and returns a new model.
 	 * Model name must be passed with its' original casing, e.g.
 	 *
@@ -576,13 +564,8 @@ class KO7_ORM extends Model implements Serializable {
 		return (string) $this->pk();
 	}
 
-	/**
-	 * Allows serialization of only the object data and state, to prevent
-	 * "stale" objects being unserialized, which also requires less memory.
-	 *
-	 * @return string
-	 */
-	public function serialize(): ?string
+
+	public function __serialize(): array
 	{
 		// Store only information about the object
 		foreach (['_primary_key_value', '_object', '_changed', '_loaded', '_saved', '_sorting', '_original_values'] as $var)
@@ -590,7 +573,18 @@ class KO7_ORM extends Model implements Serializable {
 			$data[$var] = $this->{$var};
 		}
 
-		return serialize($data);
+		return $data;
+	}
+
+	/**
+	 * Allows serialization of only the object data and state, to prevent
+	 * "stale" objects being unserialized, which also requires less memory.
+	 *
+	 * @return string
+	 */
+	public function serialize()
+	{
+		return serialize($this->__serialize());
 	}
 
 	/**
@@ -619,18 +613,12 @@ class KO7_ORM extends Model implements Serializable {
 		return array_key_exists($this->_changed, $field);
 	}
 
-	/**
-	 * Prepares the database connection and reloads the object.
-	 *
-	 * @param string $data String for unserialization
-	 * @return  void
-	 */
-	public function unserialize($data): void
+	public function __unserialize($data)
 	{
 		// Initialize model
 		$this->_initialize();
 
-		foreach (unserialize($data) as $name => $var)
+		foreach ($data as $name => $var)
 		{
 			$this->{$name} = $var;
 		}
@@ -640,6 +628,17 @@ class KO7_ORM extends Model implements Serializable {
 			// Reload the object
 			$this->reload();
 		}
+	}
+
+	/**
+	 * Prepares the database connection and reloads the object.
+	 *
+	 * @param string $data String for unserialization
+	 * @return  void
+	 */
+	public function unserialize($data)
+	{
+		$this->__unserialize(unserialize($data));
 	}
 
 	/**
