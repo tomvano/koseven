@@ -91,10 +91,10 @@ abstract class KO7_Image {
 		if ($driver === NULL)
 		{
 			// Use the driver from configuration file or default one
-			$configured_driver = KO7::$config->load('image.default_driver');
+			$driver = KO7::$config->load('image.default_driver');
 
 			// If no driver is specified throw an error, there is no default driver since 4.0
-			if ($configured_driver === NULL)
+			if ($driver === NULL)
 			{
 				throw new Image_Exception('Please specify a driver in your image configuration.');
 			}
