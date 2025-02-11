@@ -134,7 +134,7 @@ class KO7_Image_GD extends Image {
 	 */
 	public function __destruct()
 	{
-		if (is_resource($this->_image))
+		if ( $this->_has_image() )
 		{
 			// Free all resources
 			imagedestroy($this->_image);
@@ -146,7 +146,7 @@ class KO7_Image_GD extends Image {
 	 */
 	protected function _load_image() : void
 	{
-		if ( ! is_resource($this->_image))
+		if ( ! $this->_has_image() )
 		{
 			// Gets create function
 			$create = $this->_create_function;
@@ -157,6 +157,20 @@ class KO7_Image_GD extends Image {
 			// Preserve transparency when saving
 			imagesavealpha($this->_image, TRUE);
 		}
+	}
+
+	/**
+	 * checks if an image has been set
+	 * 
+	 * @return boolean
+	 */
+	protected function _has_image()
+	{
+		if ( version_compare(PHP_VERSION, '8', '>=') )
+		{
+			return is_object($this->_image);
+		}
+		return is_resource($this->_image);
 	}
 
 	/**
