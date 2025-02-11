@@ -133,7 +133,7 @@ abstract class KO7_Unittest_TestCase extends TestCase {
 	 *
 	 * @deprecated since 4.0
 	 */
-	public static function assertTag(array $matcher, string $actual, $message = NULL, $isHtml = NULL) : void
+	public static function assertTag(array $matcher, string $actual, $message = '', $isHtml = NULL) : void
 	{
 		KO7::deprecated('4.0');
 		$matched = static::tag_match($matcher, $actual, $isHtml ?? TRUE);
