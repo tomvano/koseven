@@ -89,7 +89,7 @@ abstract class KO7_Database_Query_Builder extends Database_Query {
 					}
 
 					// Database operators are always uppercase
-					$op = strtoupper($op);
+					$op = strtoupper((string) $op);
 
 					if ($op === 'BETWEEN' AND is_array($value))
 					{
