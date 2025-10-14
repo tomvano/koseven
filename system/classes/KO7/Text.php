@@ -60,6 +60,7 @@ class KO7_Text {
 	 */
 	public static function limit_words($str, $limit = 100, $end_char = NULL)
 	{
+		$str = (string) $str;
 		$limit = (int) $limit;
 		$end_char = ($end_char === NULL) ? '…' : $end_char;
 
@@ -91,7 +92,7 @@ class KO7_Text {
 	public static function limit_chars($str, $limit = 100, $end_char = NULL, $preserve_words = FALSE)
 	{
 		$end_char = ($end_char === NULL) ? '…' : $end_char;
-
+		$str = (string) $str;
 		$limit = (int) $limit;
 
 		if (trim($str) === '' OR UTF8::strlen($str) <= $limit)
@@ -246,6 +247,7 @@ class KO7_Text {
 	 */
 	public static function ucfirst($string, $delimiter = '-')
 	{
+		$string = (string) $string;
 		// Put the keys back the Case-Convention expected
 		return implode($delimiter, array_map('UTF8::ucfirst', explode($delimiter, $string)));
 	}
@@ -260,6 +262,7 @@ class KO7_Text {
 	 */
 	public static function reduce_slashes($str)
 	{
+		$str = (string) $str;
 		return preg_replace('#(?<!:)//+#', '/', $str);
 	}
 
@@ -280,6 +283,7 @@ class KO7_Text {
 	 */
 	public static function censor($str, $badwords, $replacement = '#', $replace_partial_words = TRUE)
 	{
+		$str = (string) $str;
 		foreach ( (array) $badwords as $key => $badword)
 		{
 			$badwords[$key] = str_replace('\*', '\S*?', preg_quote( (string) $badword));
@@ -349,6 +353,7 @@ class KO7_Text {
 	 */
 	public static function auto_link($text)
 	{
+		$text = (string) $text;
 		// Auto link emails first to prevent problems with "www.domain.com@example.com"
 		return Text::auto_link_urls(Text::auto_link_emails($text));
 	}
@@ -366,6 +371,7 @@ class KO7_Text {
 	 */
 	public static function auto_link_urls($text)
 	{
+		$text = (string) $text;
 		// Find and replace all http/https/ftp/ftps links that are not part of an existing html anchor
 		$text = preg_replace_callback('~\b(?<!href="|">)(?:ht|f)tps?://[^<\s]+(?:/|\b)~i', 'Text::_auto_link_urls_callback1', $text);
 
@@ -422,6 +428,7 @@ class KO7_Text {
 	 */
 	public static function auto_p($str, $br = TRUE)
 	{
+		$str = (string) $str;
 		// Trim whitespace
 		if (($str = trim($str)) === '')
 			return '';
@@ -600,6 +607,7 @@ class KO7_Text {
 	 */
 	public static function widont($str)
 	{
+		$str = (string) $str;
 		// use '%' as delimiter and 'x' as modifier
  		$widont_regex = "%
 			((?:</?(?:a|em|span|strong|i|b)[^>]*>)|[^<>\s]) # must be proceeded by an approved inline opening or closing tag or a nontag/nonspace
@@ -632,6 +640,7 @@ class KO7_Text {
 	 */
 	public static function user_agent($agent, $value)
 	{
+		$agent = (string) $agent;
 		if (is_array($value))
 		{
 			$data = [];
