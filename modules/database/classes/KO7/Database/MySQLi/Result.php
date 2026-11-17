@@ -37,8 +37,14 @@ class KO7_Database_MySQLi_Result extends Database_Result {
 
 	public function current(): mixed
 	{
-		if ($this->_current_row !== $this->_internal_row AND ! $this->seek($this->_current_row))
-			return NULL;
+		if ($this->_current_row !== $this->_internal_row)
+		{
+			// seek() returns void, so verify the pointer actually moved
+			$this->seek($this->_current_row);
+
+			if ($this->_current_row !== $this->_internal_row)
+				return NULL;
+		}
 
 		// Increment internal row for optimization assuming rows are fetched in order
 		$this->_internal_row++;
