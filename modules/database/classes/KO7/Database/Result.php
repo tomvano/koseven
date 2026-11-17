@@ -238,8 +238,11 @@ abstract class KO7_Database_Result implements Countable, Iterator, SeekableItera
 	 */
 	public function offsetGet(mixed $offset): mixed
 	{
-		if ( ! $this->seek($offset))
+		if ( ! $this->offsetExists($offset))
 			return NULL;
+
+		// seek() returns void, so it cannot be used as a condition
+		$this->seek($offset);
 
 		return $this->current();
 	}
